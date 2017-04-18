@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoLib.Data", "GeoLib.Data\GeoLib.Data.csproj", "{DB2CA02F-5D34-4734-8A44-634BFD381244}"
 EndProject
@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8AFE06
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{0DC33F89-AAA1-4324-A2D3-F38FFA05C178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoLib.MyConsoleHost", "GeoLib.MyConsoleHost\GeoLib.MyConsoleHost.csproj", "{86EA63F1-3FCC-40AA-BB4E-E1DF0137C19A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,8 +50,15 @@ Global
 		{2C7C61E8-0922-48F3-8881-8F1D96710806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C7C61E8-0922-48F3-8881-8F1D96710806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C7C61E8-0922-48F3-8881-8F1D96710806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86EA63F1-3FCC-40AA-BB4E-E1DF0137C19A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86EA63F1-3FCC-40AA-BB4E-E1DF0137C19A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86EA63F1-3FCC-40AA-BB4E-E1DF0137C19A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86EA63F1-3FCC-40AA-BB4E-E1DF0137C19A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86EA63F1-3FCC-40AA-BB4E-E1DF0137C19A} = {0DC33F89-AAA1-4324-A2D3-F38FFA05C178}
 	EndGlobalSection
 EndGlobal
