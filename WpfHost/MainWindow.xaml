@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeoLib.WpfHost"
         mc:Ignorable="d"
-        Title="MainWindow" Height="237" Width="239">
+        Title="MainWindow" Height="237" Width="339">
     <StackPanel >
         <Button x:Name="btnStart" Content="Start Services" Margin="50,20,50,0" FontSize="18" Click="btnStart_Click"/>
         <Button x:Name="btnStop" Content="Stop Services" Margin="50,20,50,20" FontSize="18" Click="btnStop_Click"/>

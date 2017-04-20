@@ -1,4 +1,5 @@
 ﻿using GeoLib.Services;
+using GeoLib.WpfHost.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,15 +36,20 @@ namespace GeoLib.WpfHost
 
             MainUI = this;
 
-            this.Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId;
+            this.Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId +
+                " | Process " + Process.GetCurrentProcess().Id.ToString();
         }
 
         ServiceHost _HostGeoManager = null;
+        ServiceHost _HostMessageManager = null;
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             _HostGeoManager = new ServiceHost(typeof(GeoManager));
+            _HostMessageManager = new ServiceHost(typeof(MessageManager));
+
             _HostGeoManager.Open();
+            _HostMessageManager.Open();
 
             btnStart.IsEnabled = false;
             btnStop.IsEnabled = true;
@@ -52,6 +58,7 @@ namespace GeoLib.WpfHost
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             _HostGeoManager.Close();
+            _HostMessageManager.Close();
 
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
@@ -62,7 +69,7 @@ namespace GeoLib.WpfHost
             int ThreadId = Thread.CurrentThread.ManagedThreadId;
 
             lblMessage.Content = message + Environment.NewLine +
-                "Thread " + Thread.CurrentThread.ManagedThreadId +
+                "shown on Thread " + Thread.CurrentThread.ManagedThreadId +
                 " | Process " + Process.GetCurrentProcess().Id.ToString();
         }
     }
