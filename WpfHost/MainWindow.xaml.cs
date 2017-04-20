@@ -1,6 +1,7 @@
 ﻿using GeoLib.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -16,19 +17,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfHost
+namespace GeoLib.WpfHost
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow MainUI { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
 
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
+
+            MainUI = this;
 
             this.Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId;
         }
@@ -50,6 +55,15 @@ namespace WpfHost
 
             btnStart.IsEnabled = true;
             btnStop.IsEnabled = false;
+        }
+
+        public void ShowMessage(string message)
+        {
+            int ThreadId = Thread.CurrentThread.ManagedThreadId;
+
+            lblMessage.Content = message + Environment.NewLine +
+                "Thread " + Thread.CurrentThread.ManagedThreadId +
+                " | Process " + Process.GetCurrentProcess().Id.ToString();
         }
     }
 }

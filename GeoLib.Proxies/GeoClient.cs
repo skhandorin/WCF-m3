@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,24 +11,32 @@ namespace GeoLib.Proxies
 {
     public class GeoClient : ClientBase<IGeoService>, IGeoService
     {
+        public GeoClient(string endpointName) 
+            : base(endpointName)
+        { }
+
+        public GeoClient(Binding binding, EndpointAddress address) 
+            : base(binding, address)
+        { }
+
         public IEnumerable<string> GetStates(bool primaryOnly)
         {
-            return Channel
+            return Channel.GetStates(primaryOnly);
         }
 
         public ZipCodeData GetZipInfo(string zip)
         {
-            throw new NotImplementedException();
+            return Channel.GetZipInfo(zip);
         }
 
         public IEnumerable<ZipCodeData> GetZips(string state)
         {
-            throw new NotImplementedException();
+            return Channel.GetZips(state);
         }
 
         public IEnumerable<ZipCodeData> GetZips(string zip, int range)
         {
-            throw new NotImplementedException();
+            return Channel.GetZips(zip, range);
         }
     }
 }

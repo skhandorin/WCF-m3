@@ -16,11 +16,7 @@ namespace GeoLib.MyConsoleHost
         {
             ServiceHost hostGeoManager = new ServiceHost(typeof(GeoManager));
 
-            string address = "net.tcp://localhost:8009/GeoService";
-            Binding binding = new NetTcpBinding();
-            Type contract = typeof(IGeoService);
-
-            hostGeoManager.AddServiceEndpoint(contract, binding, address);
+            ProceduralBinding(hostGeoManager);
 
             hostGeoManager.Open();
 
@@ -28,6 +24,22 @@ namespace GeoLib.MyConsoleHost
             Console.ReadLine();
 
             hostGeoManager.Close();
+        }
+
+        private static void ProceduralBinding(ServiceHost hostGeoManager)
+        {
+            string address = "net.tcp://localhost:8009/GeoService";
+            Binding binding = new NetTcpBinding();
+            Type contract = typeof(IGeoService);
+
+            
+
+            string address_http = "http://localhost:8081/GeoService";
+            Binding binding_http = new BasicHttpBinding();
+            Type contract_http = typeof(IGeoService);
+
+            hostGeoManager.AddServiceEndpoint(contract_http, binding_http, address_http);
+            hostGeoManager.AddServiceEndpoint(contract, binding, address);
         }
     }
 }
