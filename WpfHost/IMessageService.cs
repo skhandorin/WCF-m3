@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeoLib.WpfHost.Contracts
 {
-    [ServiceContract(Namespace = "http://www.pluralsight.com/MiguelCastro/WcfEndToEnd")]
+    [ServiceContract]
     public interface IMessageService
     {
         [OperationContract]
