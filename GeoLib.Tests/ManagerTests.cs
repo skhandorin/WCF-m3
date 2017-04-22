@@ -11,7 +11,7 @@ namespace GeoLib.Tests
     public class ManagerTests
     {
         [TestMethod]
-        public void test_zip_code_retrieval()
+        public void test_zip_code_retrieval_mock()
         {
             Mock<IZipCodeRepository> mockZipCodeRepository = new Mock<IZipCodeRepository>();
 

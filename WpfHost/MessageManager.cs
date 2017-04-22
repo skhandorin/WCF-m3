@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GeoLib.WpfHost.Contracts;
 using System.Diagnostics;
 using System.ServiceModel;
+using System.Threading;
 
 namespace GeoLib.WpfHost.Services
 {
@@ -14,7 +15,9 @@ namespace GeoLib.WpfHost.Services
     {
         public void ShowMessage(string message)
         {
-            MainWindow.MainUI.ShowMessage(message + " | Process " + Process.GetCurrentProcess().Id.ToString());
+            MainWindow.MainUI.ShowMessage(message + 
+                " Thread " + Thread.CurrentThread.ManagedThreadId.ToString() +
+                " | Process " + Process.GetCurrentProcess().Id.ToString());
         }
     }
 }
