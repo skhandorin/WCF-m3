@@ -41,12 +41,14 @@ namespace GeoLib.WpfHost
                 " | Process " + Process.GetCurrentProcess().Id.ToString();
 
             _SyncContext = SynchronizationContext.Current;
+            _TaskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
         }
 
         ServiceHost _HostGeoManager = null;
         ServiceHost _HostMessageManager = null;
 
         SynchronizationContext _SyncContext = null;
+        TaskScheduler _TaskScheduler = null;
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
@@ -73,21 +75,23 @@ namespace GeoLib.WpfHost
         {
             int threadId = Thread.CurrentThread.ManagedThreadId;
 
-            SendOrPostCallback callback = new SendOrPostCallback(arg =>
+            //SendOrPostCallback callback = new SendOrPostCallback(arg =>
+            Task task = new Task(() =>
             {
-               lblMessage.Content = message + Environment.NewLine +
-                   "(marshalled from thread " + threadId + " to thread " +
-                   Thread.CurrentThread.ManagedThreadId.ToString() +
-                   " | Process " + Process.GetCurrentProcess().Id.ToString() + ")";
+                lblMessage.Content = message + Environment.NewLine +
+                    "(marshalled from thread " + threadId + " to thread " +
+                    Thread.CurrentThread.ManagedThreadId.ToString() +
+                    " | Process " + Process.GetCurrentProcess().Id.ToString() + ")";
             });
 
-            _SyncContext.Send(callback, null);
-            
+            //_SyncContext.Send(callback, null);
+            task.Start(_TaskScheduler);
         }
 
         private void btnInProc_Click(object sender, RoutedEventArgs e)
         {
-            Thread thread = new Thread(() =>
+            //Thread thread = new Thread(() =>
+            Task.Run(() =>
             {
                 ChannelFactory<IMessageService> factory = new ChannelFactory<IMessageService>("");
 
@@ -98,8 +102,8 @@ namespace GeoLib.WpfHost
                 factory.Close();
             });
 
-            thread.IsBackground = true;
-            thread.Start();
+            //thread.IsBackground = true;
+            //thread.Start();
         }
     }
 }
