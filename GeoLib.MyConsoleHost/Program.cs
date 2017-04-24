@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel.Description;
 
 namespace GeoLib.MyConsoleHost
 {
@@ -18,12 +19,29 @@ namespace GeoLib.MyConsoleHost
 
             //ProceduralBinding(hostGeoManager);
 
+            SetServiceBehavior(hostGeoManager);
+
             hostGeoManager.Open();
 
             Console.WriteLine("Services started. Press [Enter] to exit.");
             Console.ReadLine();
 
             hostGeoManager.Close();
+        }
+
+        private static void SetServiceBehavior(ServiceHost hostGeoManager)
+        {
+            ServiceDebugBehavior behavior = hostGeoManager.Description.Behaviors.Find<ServiceDebugBehavior>();
+            if (behavior == null)
+            {
+                behavior = new ServiceDebugBehavior();
+                behavior.IncludeExceptionDetailInFaults = true;
+                hostGeoManager.Description.Behaviors.Add(behavior);
+            }
+            else
+            {
+                behavior.IncludeExceptionDetailInFaults = true;
+            }
         }
 
         private static void ProceduralBinding(ServiceHost hostGeoManager)

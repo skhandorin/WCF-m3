@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using GeoLib.Contracts;
 using GeoLib.Data;
 using System.Threading;
+using System.ServiceModel;
 
 namespace GeoLib.Services
 {
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class GeoManager : IGeoService
     {
         public GeoManager()
@@ -38,6 +40,8 @@ namespace GeoLib.Services
         public ZipCodeData GetZipInfo(string zip)
         {
             //Thread.Sleep(10000);
+
+            throw new DivideByZeroException("you cannot do that!!!");
 
             ZipCodeData zipCodeData = null;
 
