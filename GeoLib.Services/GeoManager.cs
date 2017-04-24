@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GeoLib.Contracts;
 using GeoLib.Data;
+using System.Threading;
 
 namespace GeoLib.Services
 {
@@ -36,6 +37,8 @@ namespace GeoLib.Services
 
         public ZipCodeData GetZipInfo(string zip)
         {
+            //Thread.Sleep(10000);
+
             ZipCodeData zipCodeData = null;
 
             IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
