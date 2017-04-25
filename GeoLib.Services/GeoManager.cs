@@ -41,7 +41,7 @@ namespace GeoLib.Services
         {
             //Thread.Sleep(10000);
 
-            throw new DivideByZeroException("you cannot do that!!!");
+            //throw new DivideByZeroException("you cannot do that!!!");
 
             ZipCodeData zipCodeData = null;
 

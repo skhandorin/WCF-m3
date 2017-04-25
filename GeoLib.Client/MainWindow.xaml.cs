@@ -46,6 +46,7 @@ namespace GeoLib.Client
                 GeoClient proxy = new GeoClient("tcpEP");
 
                 ZipCodeData data = proxy.GetZipInfo(txtZipCode.Text);
+                                
                 if (data != null)
                 {
                     lblCity.Content = data.City;
