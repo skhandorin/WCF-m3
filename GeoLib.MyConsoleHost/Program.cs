@@ -18,8 +18,7 @@ namespace GeoLib.MyConsoleHost
             ServiceHost hostGeoManager = new ServiceHost(typeof(GeoManager));
 
             //ProceduralBinding(hostGeoManager);
-
-            SetServiceBehavior(hostGeoManager);
+            //SetServiceBehavior(hostGeoManager);
 
             hostGeoManager.Open();
 

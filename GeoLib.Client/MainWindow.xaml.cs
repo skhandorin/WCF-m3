@@ -43,7 +43,8 @@ namespace GeoLib.Client
         {
             if (txtZipCode.Text != "")
             {
-                GeoClient proxy = new GeoClient("tcpEP");
+                //GeoClient proxy = new GeoClient("tcpEP");
+                GeoClient proxy = _Proxy;
 
                 ZipCodeData data = proxy.GetZipInfo(txtZipCode.Text);
                                 
@@ -53,7 +54,10 @@ namespace GeoLib.Client
                     lblState.Content = data.State;
                 }
 
-                proxy.Close();
+                if (proxy != _Proxy)
+                {
+                    proxy.Close();
+                }
             }
         }
 
