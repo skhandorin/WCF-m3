@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeoLib.Contracts
 {
-    [ServiceContract]
+    [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IStatefulGeoService
     {
         [OperationContract]
