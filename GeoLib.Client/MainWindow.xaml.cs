@@ -31,13 +31,15 @@ namespace GeoLib.Client
         {
             InitializeComponent();
 
-            _Proxy = new GeoClient("tcpEP"); 
+            _Proxy = new GeoClient("tcpEP");
+            _ProxyStateful = new StatefulGeoClient();
 
             this.Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId +
                 " | Process " + Process.GetCurrentProcess().Id.ToString();
         }
 
         GeoClient _Proxy = null;
+        StatefulGeoClient _ProxyStateful = null;
 
         private void btnGetInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -93,6 +95,37 @@ namespace GeoLib.Client
             proxy.ShowMsg(txtMessage.Text);
 
             factory.Close();
+        }
+
+        private void btnPush_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtZipCode.Text != "")
+            {
+                _ProxyStateful.PushZip(txtZipCode.Text);
+            }
+        }
+
+        private void bthGetPushedInfo_Click(object sender, RoutedEventArgs e)
+        {
+            ZipCodeData data = _ProxyStateful.GetZipInfo();
+
+            if (data != null)
+            {
+                lblCity.Content = data.City;
+                lblState.Content = data.State;
+            }
+        }
+
+        private void btnGetInRange_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtRange.Text != "")
+            {
+                IEnumerable<ZipCodeData> data = _ProxyStateful.GetZips(int.Parse(txtRange.Text));
+                if (data != null)
+                {
+                    lstZips.ItemsSource = data;
+                }
+            }
         }
     }
 }

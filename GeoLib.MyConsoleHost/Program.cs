@@ -22,10 +22,14 @@ namespace GeoLib.MyConsoleHost
 
             hostGeoManager.Open();
 
+            ServiceHost hostStatefulGeoManager = new ServiceHost(typeof(StatefulGeoManager));
+            hostStatefulGeoManager.Open();
+
             Console.WriteLine("Services started. Press [Enter] to exit.");
             Console.ReadLine();
 
             hostGeoManager.Close();
+            hostStatefulGeoManager.Close();
         }
 
         private static void SetServiceBehavior(ServiceHost hostGeoManager)

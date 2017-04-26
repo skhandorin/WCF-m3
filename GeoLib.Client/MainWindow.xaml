@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeoLib.Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="554" Width="730">
+        Title="MainWindow" Height="554" Width="927.293">
     <Grid>
         <Label Content="Zip Code:" Height="40" HorizontalAlignment="Left" Margin="53,42,0,0" Name="label1" VerticalAlignment="Top" FontSize="20" Width="103" />
         <TextBox Height="36" HorizontalAlignment="Left" Margin="156,46,0,0" Name="txtZipCode" VerticalAlignment="Top" Width="143" FontSize="20" />
-        <Button Content="Get Info" Height="39" HorizontalAlignment="Left" Margin="156,103,0,0" x:Name="btnGetInfo" VerticalAlignment="Top" Width="100" Click="btnGetInfo_Click" FontSize="20" />
+        <Button Content="Get Info" Height="35" HorizontalAlignment="Left" Margin="156,89,0,0" x:Name="btnGetInfo" VerticalAlignment="Top" Width="78" Click="btnGetInfo_Click" FontSize="20" />
         <Label Content="" Height="38" HorizontalAlignment="Left" Margin="156,157,0,0" Name="lblCity" VerticalAlignment="Top" Width="255" FontSize="20" />
         <Label Content="" Height="35" HorizontalAlignment="Left" Margin="156,211,0,0" Name="lblState" VerticalAlignment="Top" Width="255" FontSize="20" />
-        <Label Content="State:" Height="40" HorizontalAlignment="Left" Margin="379,42,0,0" x:Name="label1_Copy" VerticalAlignment="Top" FontSize="20" Width="103" />
-        <TextBox Height="36" HorizontalAlignment="Left" Margin="463,46,0,0" x:Name="txtState" VerticalAlignment="Top" Width="143" FontSize="20" />
-        <Button Content="Get Zip Codes" Height="39" HorizontalAlignment="Left" Margin="463,103,0,0" x:Name="btnGetZipCodes" VerticalAlignment="Top" Width="143" Click="btnGetZipCodes_Click" FontSize="20" />
+        <Label Content="State:" Height="40" HorizontalAlignment="Left" Margin="496,88,0,0" x:Name="label1_Copy" VerticalAlignment="Top" FontSize="20" Width="103" />
+        <TextBox Height="36" HorizontalAlignment="Left" Margin="604,88,0,0" x:Name="txtState" VerticalAlignment="Top" Width="143" FontSize="20" />
+        <Button Content="Get Zip Codes" Height="39" HorizontalAlignment="Left" Margin="766,88,0,0" x:Name="btnGetZipCodes" VerticalAlignment="Top" Width="143" Click="btnGetZipCodes_Click" FontSize="20" />
         <ListBox HorizontalAlignment="Left" Height="279" Margin="463,211,0,0" VerticalAlignment="Top" Width="232" Name="lstZips" FontSize="16">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -29,5 +29,10 @@
         <Label Content="Text to show:" Height="40" HorizontalAlignment="Left" Margin="53,340,0,0" x:Name="label1_Copy1" VerticalAlignment="Top" FontSize="20" Width="147" />
         <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Height="32" Margin="65,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="18"/>
         <Button Content="Make Call" Height="39" HorizontalAlignment="Left" Margin="311,422,0,0" x:Name="btnMakeCall" VerticalAlignment="Top" Width="100" Click="btnMakeCall_Click" FontSize="20" />
+        <Button x:Name="btnPush" Content="Push" HorizontalAlignment="Left" Margin="311,46,0,0" VerticalAlignment="Top" Width="86" Height="36" FontSize="20" Click="btnPush_Click"/>
+        <Label x:Name="lblRange" Content="Range (miles):" HorizontalAlignment="Left" Margin="444,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.959,1.055" Width="155" Height="36" FontSize="20"/>
+        <TextBox x:Name="txtRange" HorizontalAlignment="Left" Height="36" Margin="604,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" FontSize="20"/>
+        <Button x:Name="btnGetInRange" Content="Get In Range" HorizontalAlignment="Left" Margin="766,46,0,0" VerticalAlignment="Top" Width="143" Height="36" FontSize="20" Click="btnGetInRange_Click"/>
+        <Button x:Name="bthGetPushedInfo" Content="Get Pushed Info" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="145" Height="35" FontSize="20" Click="bthGetPushedInfo_Click"/>
     </Grid>
 </Window>
