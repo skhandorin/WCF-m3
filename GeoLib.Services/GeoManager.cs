@@ -59,6 +59,14 @@ namespace GeoLib.Services
                     ZipCode = zipCodeEntity.Zip
                 };
             }
+            else
+            {
+                //throw new ApplicationException($"Zip code {zip} not found.");
+                //throw new FaultException($"Zip code {zip} not found.");
+
+                ApplicationException ex = new ApplicationException($"Zip code {zip} not found.");
+                throw new FaultException<ApplicationException>(ex, "Just another message");
+            }
 
             _Counter++;
             //Console.WriteLine($"Counter = {_Counter.ToString()}");
