@@ -7,11 +7,15 @@ using GeoLib.Contracts;
 using GeoLib.Data;
 using System.Threading;
 using System.ServiceModel;
+using System.Windows.Forms;
 
 namespace GeoLib.Services
 {
-    [ServiceBehavior(IncludeExceptionDetailInFaults = true, 
-                     InstanceContextMode = InstanceContextMode.PerCall)]
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true
+                     ,InstanceContextMode = InstanceContextMode.PerSession
+                     ,ConcurrencyMode = ConcurrencyMode.Multiple
+                     ,UseSynchronizationContext = false
+        )]
     public class GeoManager : IGeoService
     {
         public GeoManager()
@@ -57,7 +61,9 @@ namespace GeoLib.Services
             }
 
             _Counter++;
-            Console.WriteLine($"Counter = {_Counter.ToString()}");
+            //Console.WriteLine($"Counter = {_Counter.ToString()}");
+            //Thread.Sleep(10000);
+            MessageBox.Show($"{zip} = {zipCodeData.City}, {zipCodeData.State}", "Call Counter " + _Counter);
 
             return zipCodeData;
         }

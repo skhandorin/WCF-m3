@@ -32,6 +32,7 @@ namespace GeoLib.Client
             InitializeComponent();
 
             _Proxy = new GeoClient("tcpEP");
+            _Proxy.Open();
             _ProxyStateful = new StatefulGeoClient();
 
             this.Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId +
@@ -41,15 +42,16 @@ namespace GeoLib.Client
         GeoClient _Proxy = null;
         StatefulGeoClient _ProxyStateful = null;
 
-        private void btnGetInfo_Click(object sender, RoutedEventArgs e)
+        private async void btnGetInfo_Click(object sender, RoutedEventArgs e)
         {
             if (txtZipCode.Text != "")
             {
                 //GeoClient proxy = new GeoClient("tcpEP");
                 GeoClient proxy = _Proxy;
+                string zipCode = txtZipCode.Text;
 
-                ZipCodeData data = proxy.GetZipInfo(txtZipCode.Text);
-                                
+                ZipCodeData data = await Task.Run(() => proxy.GetZipInfo(zipCode));
+
                 if (data != null)
                 {
                     lblCity.Content = data.City;

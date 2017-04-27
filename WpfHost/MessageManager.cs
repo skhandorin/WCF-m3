@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace GeoLib.WpfHost.Services
 {
-    [ServiceBehavior(UseSynchronizationContext = false)]
+    [ServiceBehavior(UseSynchronizationContext = true)]
     public class MessageManager : IMessageService
     {
         public void ShowMessage(string message)
