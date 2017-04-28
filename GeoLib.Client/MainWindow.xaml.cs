@@ -62,7 +62,25 @@ namespace GeoLib.Client
                 catch (FaultException<ExceptionDetail> ex)
                 {
                     MessageBox.Show("Exception thrown by service.\n\rException type: " +
-                        "FaultException<ExceptionDetail>\r\n" +
+                        ex.GetType().Name + "\n\r" +
+                        "Message: " + ex.Message + "\r\n" +
+                        "Detailed message: " + ex.Detail.Message + "\r\n" +
+                        "Proxy state: " + proxy.State.ToString());
+                }
+                catch (FaultException<NotFoundData> ex)
+                {
+                    MessageBox.Show("FaultException<NotFoundData> thrown by service.\n\rException type: " +
+                        ex.GetType().Name + "\n\r" +
+                        "Message: " + ex.Message + "\r\n" +
+                        "Detailed message: " + ex.Detail.Message + "\r\n" +
+                        "When: " + ex.Detail.When + "\r\n" +
+                        "User: " + ex.Detail.User + "\r\n" +
+                        "Proxy state: " + proxy.State.ToString());
+                }
+                catch (FaultException<ApplicationException> ex)
+                {
+                    MessageBox.Show("FaultException<ApplicationException> thrown by service.\n\rException type: " +
+                        ex.GetType().Name + "\n\r" +
                         "Message: " + ex.Message + "\r\n" +
                         "Detailed message: " + ex.Detail.Message + "\r\n" +
                         "Proxy state: " + proxy.State.ToString());

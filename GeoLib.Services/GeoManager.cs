@@ -64,14 +64,22 @@ namespace GeoLib.Services
                 //throw new ApplicationException($"Zip code {zip} not found.");
                 //throw new FaultException($"Zip code {zip} not found.");
 
-                ApplicationException ex = new ApplicationException($"Zip code {zip} not found.");
-                throw new FaultException<ApplicationException>(ex, "Just another message");
+                //ApplicationException ex = new ApplicationException($"Zip code {zip} not found.");
+                //throw new FaultException<ApplicationException>(ex, "Just another message");
+
+                NotFoundData data = new NotFoundData()
+                {
+                    Message = $"Zip code {zip} not found.",
+                    When = DateTime.Now.ToString(),
+                    User = "Sergey"
+                };
+                throw new FaultException<NotFoundData>(data, "Just another message");
             }
 
             _Counter++;
             //Console.WriteLine($"Counter = {_Counter.ToString()}");
             //Thread.Sleep(10000);
-            MessageBox.Show($"{zip} = {zipCodeData.City}, {zipCodeData.State}", "Call Counter " + _Counter);
+            //MessageBox.Show($"{zip} = {zipCodeData.City}, {zipCodeData.State}", "Call Counter " + _Counter);
 
             return zipCodeData;
         }

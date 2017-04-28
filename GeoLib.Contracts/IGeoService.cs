@@ -12,6 +12,7 @@ namespace GeoLib.Contracts
     {
         [OperationContract]
         [FaultContract(typeof(ApplicationException))]
+        [FaultContract(typeof(NotFoundData))]
         ZipCodeData GetZipInfo(string zip);
 
         [OperationContract]
