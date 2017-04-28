@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GeoLib.Client"
         mc:Ignorable="d"
         Title="MainWindow" Height="554" Width="927.293">
-    <Grid>
+    <Grid HorizontalAlignment="Right" Width="919">
         <Label Content="Zip Code:" Height="40" HorizontalAlignment="Left" Margin="53,42,0,0" Name="label1" VerticalAlignment="Top" FontSize="20" Width="103" />
         <TextBox Height="36" HorizontalAlignment="Left" Margin="156,46,0,0" Name="txtZipCode" VerticalAlignment="Top" Width="143" FontSize="20" />
         <Button Content="Get Info" Height="35" HorizontalAlignment="Left" Margin="156,89,0,0" x:Name="btnGetInfo" VerticalAlignment="Top" Width="78" Click="btnGetInfo_Click" FontSize="20" />
@@ -34,5 +34,7 @@
         <TextBox x:Name="txtRange" HorizontalAlignment="Left" Height="36" Margin="604,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" FontSize="20"/>
         <Button x:Name="btnGetInRange" Content="Get In Range" HorizontalAlignment="Left" Margin="766,46,0,0" VerticalAlignment="Top" Width="143" Height="36" FontSize="20" Click="btnGetInRange_Click"/>
         <Button x:Name="bthGetPushedInfo" Content="Get Pushed Info" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="145" Height="35" FontSize="20" Click="bthGetPushedInfo_Click"/>
+        <Button x:Name="btnUpdateBatch" Content="Update Batch" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="128" Height="38" Click="btnUpdateBatch_Click" FontSize="20"/>
+        <Button x:Name="btnPutBack" Content="Put Back" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="20" Click="btnPutBack_Click"/>
     </Grid>
 </Window>

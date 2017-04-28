@@ -11,6 +11,10 @@ namespace GeoLib.Proxies
 {
     public class GeoClient : ClientBase<IGeoService>, IGeoService
     {
+        public GeoClient() 
+            : base()
+        { }
+
         public GeoClient(string endpointName) 
             : base(endpointName)
         { }
@@ -37,6 +41,18 @@ namespace GeoLib.Proxies
         public IEnumerable<ZipCodeData> GetZips(string zip, int range)
         {
             return Channel.GetZips(zip, range);
+        }
+
+        public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
+        {
+            Channel.UpdateZipCity(zipCityData);
+            throw new NotImplementedException();
+        }
+
+        public void UpdateZipCity(string zip, string city)
+        {
+            Channel.UpdateZipCity(zip, city);
+            throw new NotImplementedException();
         }
     }
 }

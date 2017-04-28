@@ -145,5 +145,31 @@ namespace GeoLib.Services
             }
             return zipCodeData;
         }
+
+        public void UpdateZipCity(string zip, string city)
+        {
+            IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
+
+            ZipCode zipEntity = zipCodeRepository.GetByZip(zip);
+            if (zipEntity != null)
+            {
+                zipEntity.City = city;
+                zipCodeRepository.Update(zipEntity);
+            }
+        }
+
+        public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
+        {
+            IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
+
+            Dictionary<string, string> cityBatch = new Dictionary<string, string>();
+
+            foreach (ZipCityData zipCityItem in zipCityData)
+            {
+                cityBatch.Add(zipCityItem.ZipCode, zipCityItem.City);
+            }
+
+            zipCodeRepository.UpdateCityBatch(cityBatch);
+        }
     }
 }

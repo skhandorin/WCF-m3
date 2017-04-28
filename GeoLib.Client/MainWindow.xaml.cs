@@ -171,5 +171,31 @@ namespace GeoLib.Client
                 }
             }
         }
+
+        private void btnUpdateBatch_Click(object sender, RoutedEventArgs e)
+        {
+            List<ZipCityData> cityZipList = new List<ZipCityData>()
+            {
+                new ZipCityData() { ZipCode = "07035", City = "Bedrock" },
+                new ZipCityData() { ZipCode = "33030", City = "End of the World" }
+            };
+
+            try
+            {
+                GeoClient proxy = new GeoClient("tcpEP");
+                proxy.UpdateZipCity(cityZipList);
+                proxy.Close();
+                MessageBox.Show("Updated.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void btnPutBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
