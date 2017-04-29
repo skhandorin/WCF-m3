@@ -10,6 +10,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
 //using System.Windows.Data;
@@ -44,6 +45,11 @@ namespace GeoLib.Client
 
         private async void btnGetInfo_Click(object sender, RoutedEventArgs e)
         {
+            if (txtZipCode.Text == "")
+            {
+                txtZipCode.Text = "07035";
+            }
+
             if (txtZipCode.Text != "")
             {
                 //GeoClient proxy = new GeoClient("tcpEP");
@@ -183,8 +189,17 @@ namespace GeoLib.Client
             try
             {
                 GeoClient proxy = new GeoClient("tcpEP");
-                proxy.UpdateZipCity(cityZipList);
-                proxy.Close();
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    proxy.UpdateZipCity(cityZipList);
+                    proxy.Close();
+
+                    throw new ApplicationException("uh oh");
+
+                    scope.Complete();
+                }
+                
+                
                 MessageBox.Show("Updated.");
             }
             catch (Exception ex)
@@ -195,7 +210,23 @@ namespace GeoLib.Client
 
         private void btnPutBack_Click(object sender, RoutedEventArgs e)
         {
+            List<ZipCityData> cityZipList = new List<ZipCityData>()
+            {
+                new ZipCityData() { ZipCode = "07035", City = "Linkoln Park" },
+                new ZipCityData() { ZipCode = "33030", City = "Homestead" }
+            };
 
+            try
+            {
+                GeoClient proxy = new GeoClient("tcpEP");
+                proxy.UpdateZipCity(cityZipList);
+                proxy.Close();
+                MessageBox.Show("Updated.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }

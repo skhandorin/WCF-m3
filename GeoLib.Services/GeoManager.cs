@@ -8,13 +8,15 @@ using GeoLib.Data;
 using System.Threading;
 using System.ServiceModel;
 using System.Windows.Forms;
+using System.Transactions;
 
 namespace GeoLib.Services
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true
                      ,InstanceContextMode = InstanceContextMode.PerSession
-                     ,ConcurrencyMode = ConcurrencyMode.Multiple
+                     //,ConcurrencyMode = ConcurrencyMode.Multiple
                      ,UseSynchronizationContext = false
+                     //,ReleaseServiceInstanceOnTransactionComplete = false
         )]
     public class GeoManager : IGeoService
     {
@@ -146,6 +148,7 @@ namespace GeoLib.Services
             return zipCodeData;
         }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
         public void UpdateZipCity(string zip, string city)
         {
             IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
@@ -158,18 +161,30 @@ namespace GeoLib.Services
             }
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
         {
             IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
 
-            Dictionary<string, string> cityBatch = new Dictionary<string, string>();
+            //Dictionary<string, string> cityBatch = new Dictionary<string, string>();
+            //foreach (ZipCityData zipCityItem in zipCityData)
+            //{
+            //    cityBatch.Add(zipCityItem.ZipCode, zipCityItem.City);
+            //}
+            //zipCodeRepository.UpdateCityBatch(cityBatch);
+                
+            int counter = 0;
 
-            foreach (ZipCityData zipCityItem in zipCityData)
+            foreach (var zipCityItem in zipCityData)
             {
-                cityBatch.Add(zipCityItem.ZipCode, zipCityItem.City);
-            }
+                counter++;
+                //if (counter == 2)
+                //    throw new FaultException("Sorry, no can do.");
 
-            zipCodeRepository.UpdateCityBatch(cityBatch);
+                ZipCode zipCodeEntity = zipCodeRepository.GetByZip(zipCityItem.ZipCode);
+                zipCodeEntity.City = zipCityItem.City;
+                ZipCode updateItem = zipCodeRepository.Update(zipCodeEntity);
+            }
         }
     }
 }

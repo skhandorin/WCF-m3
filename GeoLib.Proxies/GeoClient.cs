@@ -46,13 +46,11 @@ namespace GeoLib.Proxies
         public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
         {
             Channel.UpdateZipCity(zipCityData);
-            throw new NotImplementedException();
         }
 
         public void UpdateZipCity(string zip, string city)
         {
             Channel.UpdateZipCity(zip, city);
-            throw new NotImplementedException();
         }
     }
 }
