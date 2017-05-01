@@ -36,5 +36,6 @@
         <Button x:Name="bthGetPushedInfo" Content="Get Pushed Info" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="145" Height="35" FontSize="20" Click="bthGetPushedInfo_Click"/>
         <Button x:Name="btnUpdateBatch" Content="Update Batch" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="128" Height="38" Click="btnUpdateBatch_Click" FontSize="20"/>
         <Button x:Name="btnPutBack" Content="Put Back" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="20" Click="btnPutBack_Click"/>
+        <Button x:Name="btnOneWay" Content="One way" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" Width="128" RenderTransformOrigin="1.16,0.283" Height="38" FontSize="20" Click="btnOneWay_Click"/>
     </Grid>
 </Window>

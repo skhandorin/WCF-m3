@@ -228,5 +228,18 @@ namespace GeoLib.Client
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void btnOneWay_Click(object sender, RoutedEventArgs e)
+        {
+            GeoClient proxy = new GeoClient("tcpEP");
+
+            proxy.OneWayExample();
+
+            MessageBox.Show("Oneway example called. Back at client.");
+
+            proxy.Close();
+
+            MessageBox.Show("Proxy is now close.");
+        }
     }
 }

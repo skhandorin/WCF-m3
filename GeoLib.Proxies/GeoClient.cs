@@ -43,6 +43,11 @@ namespace GeoLib.Proxies
             return Channel.GetZips(zip, range);
         }
 
+        public void OneWayExample()
+        {
+            Channel.OneWayExample();
+        }
+
         public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
         {
             Channel.UpdateZipCity(zipCityData);

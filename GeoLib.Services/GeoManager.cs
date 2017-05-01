@@ -186,5 +186,10 @@ namespace GeoLib.Services
                 ZipCode updateItem = zipCodeRepository.Update(zipCodeEntity);
             }
         }
+
+        public void OneWayExample()
+        {
+            MessageBox.Show("Made it to the server.");
+        }
     }
 }
