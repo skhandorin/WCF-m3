@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeoLib.Contracts
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IUpdateZipCallback))]
     public interface IGeoService
     {
         [OperationContract]
@@ -34,5 +34,12 @@ namespace GeoLib.Contracts
 
         [OperationContract(IsOneWay = true)]
         void OneWayExample();
+    }
+    
+    [ServiceContract]
+    public interface IUpdateZipCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void ZipUpdated(ZipCityData zipCityData);
     }
 }

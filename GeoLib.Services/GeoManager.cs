@@ -184,6 +184,12 @@ namespace GeoLib.Services
                 ZipCode zipCodeEntity = zipCodeRepository.GetByZip(zipCityItem.ZipCode);
                 zipCodeEntity.City = zipCityItem.City;
                 ZipCode updateItem = zipCodeRepository.Update(zipCodeEntity);
+
+                IUpdateZipCallback callback = OperationContext.Current.GetCallbackChannel<IUpdateZipCallback>();
+                if (callback != null)
+                {
+                    callback.ZipUpdated(zipCityItem);
+                }
             }
         }
 
