@@ -24,23 +24,9 @@ namespace GeoLib.Contracts
         [OperationContract(Name = "GetZipsForRange")]
         IEnumerable<ZipCodeData> GetZips(string zip, int range);
 
-        [OperationContract(Name = "UpdateZipCity_One")]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void UpdateZipCity(string zip, string city);
-
-        [OperationContract(Name = "UpdateZipCityBatch")]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        int UpdateZipCity(IEnumerable<ZipCityData> zipCityData);
-
         [OperationContract(IsOneWay = true)]
         void OneWayExample();
     }
     
-    [ServiceContract]
-    public interface IUpdateZipCallback
-    {
-        [OperationContract(IsOneWay = false)]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void ZipUpdated(ZipCityData zipCityData);
-    }
+
 }

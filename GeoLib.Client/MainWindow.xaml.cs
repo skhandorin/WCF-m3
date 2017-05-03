@@ -196,46 +196,47 @@ namespace GeoLib.Client
 
             lstUpdates.Items.Clear();
 
-            //Task.Run(() =>
-            //{
-            //    try
-            //    {
-            //        GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
-            //        using (TransactionScope scope = new TransactionScope())
-            //        {
-            //            proxy.UpdateZipCity(cityZipList);
-            //            proxy.Close();
-            //            //throw new ApplicationException("uh oh");
-            //            scope.Complete();
-            //        }
-            //        MessageBox.Show("Updated.");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error: " + ex.Message);
-            //    }
-            //});
-
-            GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
-            Task<int> task = proxy.UpdateZipCityAsync(cityZipList);
-
-            task.ContinueWith(result =>
+            Task.Run(() =>
             {
-                if (result.Exception == null)
-                    MessageBox.Show($"Updated {result.Result}");
-                else
+                try
                 {
-                    //MessageBox.Show("Error: " + result.Exception.Message + "\n\r" + result.Exception.InnerException.Message);
-                    try
+                    GeoAdminClient proxy = new GeoAdminClient(new InstanceContext(this), "tcpEP");
+                    int updated = 0;
+                    using (TransactionScope scope = new TransactionScope())
                     {
-                        throw result.Exception.InnerException;
+                        updated = proxy.UpdateZipCity(cityZipList);
+                        proxy.Close();
+                        //throw new ApplicationException("uh oh");
+                        scope.Complete();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
+                    MessageBox.Show($"Updated {updated}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
                 }
             });
+
+            //GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            //Task<int> task = proxy.UpdateZipCityAsync(cityZipList);
+
+            //task.ContinueWith(result =>
+            //{
+            //    if (result.Exception == null)
+            //        MessageBox.Show($"Updated {result.Result}");
+            //    else
+            //    {
+            //        //MessageBox.Show("Error: " + result.Exception.Message + "\n\r" + result.Exception.InnerException.Message);
+            //        try
+            //        {
+            //            throw result.Exception.InnerException;
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show("Error: " + ex.Message);
+            //        }
+            //    }
+            //});
 
             //MessageBox.Show("Call made");
         }
@@ -264,41 +265,41 @@ namespace GeoLib.Client
 
             lstUpdates.Items.Clear();
 
-            //Task.Run(() =>
-            //{
-            //    try
-            //    {
-            //        GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
-            //        proxy.UpdateZipCity(cityZipList);
-            //        proxy.Close();
-            //        MessageBox.Show("Updated.");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error: " + ex.Message);
-            //    }
-            //});
-
-            GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
-            Task<int> task = proxy.UpdateZipCityAsync(cityZipList);
-
-            task.ContinueWith(result =>
+            Task.Run(() =>
             {
-                if (result.Exception == null)
-                    MessageBox.Show($"Updated {result.Result}");
-                else
+                try
                 {
-                    //MessageBox.Show("Error: " + result.Exception.Message + "\n\r" + result.Exception.InnerException.Message);
-                    try
-                    {
-                        throw result.Exception.InnerException;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
+                    GeoAdminClient proxy = new GeoAdminClient(new InstanceContext(this), "tcpEP");
+                    int updated = proxy.UpdateZipCity(cityZipList);
+                    proxy.Close();
+                    MessageBox.Show($"Updated {updated}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
                 }
             });
+
+            //GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            //Task<int> task = proxy.UpdateZipCityAsync(cityZipList);
+
+            //task.ContinueWith(result =>
+            //{
+            //    if (result.Exception == null)
+            //        MessageBox.Show($"Updated {result.Result}");
+            //    else
+            //    {
+            //        //MessageBox.Show("Error: " + result.Exception.Message + "\n\r" + result.Exception.InnerException.Message);
+            //        try
+            //        {
+            //            throw result.Exception.InnerException;
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show("Error: " + ex.Message);
+            //        }
+            //    }
+            //});
         }
 
         private void btnOneWay_Click(object sender, RoutedEventArgs e)
