@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GeoLib.Proxies
 {
-    public class GeoClient : DuplexClientBase<IGeoService>, IGeoService
+    public class GeoClient : DuplexClientBase<IGeoService>, GeoLib.Proxies.IGeoService
     {
         public GeoClient(InstanceContext callbackInstance) 
             : base(callbackInstance)
@@ -48,14 +48,19 @@ namespace GeoLib.Proxies
             Channel.OneWayExample();
         }
 
-        public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
-        {
-            Channel.UpdateZipCity(zipCityData);
-        }
-
         public void UpdateZipCity(string zip, string city)
         {
             Channel.UpdateZipCity(zip, city);
+        }
+
+        public int UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
+        {
+            return Channel.UpdateZipCity(zipCityData);
+        }
+
+        public Task<int> UpdateZipCityAsync(IEnumerable<ZipCityData> zipCityData)
+        {
+            return Channel.UpdateZipCityAsync(zipCityData);
         }
     }
 }

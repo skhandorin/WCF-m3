@@ -7,15 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="554" Width="927.293">
     <Grid HorizontalAlignment="Right" Width="919">
-        <Label Content="Zip Code:" Height="40" HorizontalAlignment="Left" Margin="53,42,0,0" Name="label1" VerticalAlignment="Top" FontSize="20" Width="103" />
-        <TextBox Height="36" HorizontalAlignment="Left" Margin="156,46,0,0" Name="txtZipCode" VerticalAlignment="Top" Width="143" FontSize="20" />
-        <Button Content="Get Info" Height="35" HorizontalAlignment="Left" Margin="156,89,0,0" x:Name="btnGetInfo" VerticalAlignment="Top" Width="78" Click="btnGetInfo_Click" FontSize="20" />
-        <Label Content="" Height="38" HorizontalAlignment="Left" Margin="156,157,0,0" Name="lblCity" VerticalAlignment="Top" Width="255" FontSize="20" />
-        <Label Content="" Height="35" HorizontalAlignment="Left" Margin="156,211,0,0" Name="lblState" VerticalAlignment="Top" Width="255" FontSize="20" />
-        <Label Content="State:" Height="40" HorizontalAlignment="Left" Margin="496,88,0,0" x:Name="label1_Copy" VerticalAlignment="Top" FontSize="20" Width="103" />
-        <TextBox Height="36" HorizontalAlignment="Left" Margin="604,88,0,0" x:Name="txtState" VerticalAlignment="Top" Width="143" FontSize="20" />
-        <Button Content="Get Zip Codes" Height="39" HorizontalAlignment="Left" Margin="766,88,0,0" x:Name="btnGetZipCodes" VerticalAlignment="Top" Width="143" Click="btnGetZipCodes_Click" FontSize="20" />
-        <ListBox HorizontalAlignment="Left" Height="279" Margin="463,211,0,0" VerticalAlignment="Top" Width="232" Name="lstZips" FontSize="16">
+        <Label Content="Zip Code:" Height="40" HorizontalAlignment="Left" Margin="53,61,0,0" Name="label1" VerticalAlignment="Top" FontSize="20" Width="103" />
+        <TextBox Height="36" HorizontalAlignment="Left" Margin="156,65,0,0" Name="txtZipCode" VerticalAlignment="Top" Width="143" FontSize="20" />
+        <Button Content="Get Info" Height="35" HorizontalAlignment="Left" Margin="156,108,0,0" x:Name="btnGetInfo" VerticalAlignment="Top" Width="78" Click="btnGetInfo_Click" FontSize="20" />
+        <Label Content="" Height="38" HorizontalAlignment="Left" Margin="156,176,0,0" Name="lblCity" VerticalAlignment="Top" Width="255" FontSize="20" />
+        <Label Content="" Height="35" HorizontalAlignment="Left" Margin="156,230,0,0" Name="lblState" VerticalAlignment="Top" Width="255" FontSize="20" />
+        <Label Content="State:" Height="40" HorizontalAlignment="Left" Margin="496,107,0,0" x:Name="label1_Copy" VerticalAlignment="Top" FontSize="20" Width="103" />
+        <TextBox Height="36" HorizontalAlignment="Left" Margin="604,107,0,0" x:Name="txtState" VerticalAlignment="Top" Width="143" FontSize="20" />
+        <Button Content="Get Zip Codes" Height="39" HorizontalAlignment="Left" Margin="766,107,0,0" x:Name="btnGetZipCodes" VerticalAlignment="Top" Width="143" Click="btnGetZipCodes_Click" FontSize="20" />
+        <ListBox HorizontalAlignment="Left" Height="279" Margin="463,230,0,0" VerticalAlignment="Top" Width="232" Name="lstZips" FontSize="16">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -26,16 +26,27 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Text to show:" Height="40" HorizontalAlignment="Left" Margin="53,340,0,0" x:Name="label1_Copy1" VerticalAlignment="Top" FontSize="20" Width="147" />
-        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Height="32" Margin="65,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="18"/>
-        <Button Content="Make Call" Height="39" HorizontalAlignment="Left" Margin="311,422,0,0" x:Name="btnMakeCall" VerticalAlignment="Top" Width="100" Click="btnMakeCall_Click" FontSize="20" />
-        <Button x:Name="btnPush" Content="Push" HorizontalAlignment="Left" Margin="311,46,0,0" VerticalAlignment="Top" Width="86" Height="36" FontSize="20" Click="btnPush_Click"/>
-        <Label x:Name="lblRange" Content="Range (miles):" HorizontalAlignment="Left" Margin="444,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.959,1.055" Width="155" Height="36" FontSize="20"/>
-        <TextBox x:Name="txtRange" HorizontalAlignment="Left" Height="36" Margin="604,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" FontSize="20"/>
-        <Button x:Name="btnGetInRange" Content="Get In Range" HorizontalAlignment="Left" Margin="766,46,0,0" VerticalAlignment="Top" Width="143" Height="36" FontSize="20" Click="btnGetInRange_Click"/>
-        <Button x:Name="bthGetPushedInfo" Content="Get Pushed Info" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="145" Height="35" FontSize="20" Click="bthGetPushedInfo_Click"/>
-        <Button x:Name="btnUpdateBatch" Content="Update Batch" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="128" Height="38" Click="btnUpdateBatch_Click" FontSize="20"/>
-        <Button x:Name="btnPutBack" Content="Put Back" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="20" Click="btnPutBack_Click"/>
-        <Button x:Name="btnOneWay" Content="One way" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" Width="128" RenderTransformOrigin="1.16,0.283" Height="38" FontSize="20" Click="btnOneWay_Click"/>
+        <Label Content="Text to show:" Height="40" HorizontalAlignment="Left" Margin="10,469,0,0" x:Name="label1_Copy1" VerticalAlignment="Top" FontSize="20" Width="128" RenderTransformOrigin="0.128,2.844" />
+        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Height="32" Margin="156,470,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" FontSize="18"/>
+        <Button Content="Make Call" Height="39" HorizontalAlignment="Left" Margin="343,470,0,0" x:Name="btnMakeCall" VerticalAlignment="Top" Width="100" Click="btnMakeCall_Click" FontSize="20" />
+        <Button x:Name="btnPush" Content="Push" HorizontalAlignment="Left" Margin="311,65,0,0" VerticalAlignment="Top" Width="86" Height="36" FontSize="20" Click="btnPush_Click"/>
+        <Label x:Name="lblRange" Content="Range (miles):" HorizontalAlignment="Left" Margin="444,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.959,1.055" Width="155" Height="36" FontSize="20"/>
+        <TextBox x:Name="txtRange" HorizontalAlignment="Left" Height="36" Margin="604,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" FontSize="20"/>
+        <Button x:Name="btnGetInRange" Content="Get In Range" HorizontalAlignment="Left" Margin="766,65,0,0" VerticalAlignment="Top" Width="143" Height="36" FontSize="20" Click="btnGetInRange_Click"/>
+        <Button x:Name="bthGetPushedInfo" Content="Get Pushed Info" HorizontalAlignment="Left" Margin="252,108,0,0" VerticalAlignment="Top" Width="145" Height="35" FontSize="20" Click="bthGetPushedInfo_Click"/>
+        <Button x:Name="btnUpdateBatch" Content="Update Batch" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="128" Height="38" Click="btnUpdateBatch_Click" FontSize="20"/>
+        <Button x:Name="btnPutBack" Content="Put Back" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="20" Click="btnPutBack_Click"/>
+        <Button x:Name="btnOneWay" Content="One way" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Width="128" RenderTransformOrigin="1.16,0.283" Height="38" FontSize="20" Click="btnOneWay_Click"/>
+        <ListBox x:Name="lstUpdates" HorizontalAlignment="Left" Height="162" Margin="156,285,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="1.597,0.948">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ZipCode}" />
+                        <TextBlock Text=" - " />
+                        <TextBlock Text="{Binding City}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

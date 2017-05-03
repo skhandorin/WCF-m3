@@ -37,12 +37,17 @@ namespace GeoLib.Client
             _Proxy.Open();
             _ProxyStateful = new StatefulGeoClient();
 
+            _SyncContext = SynchronizationContext.Current;
+            _TaskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+
             this.Title = "UI Running on Thread " + Thread.CurrentThread.ManagedThreadId +
                 " | Process " + Process.GetCurrentProcess().Id.ToString();
         }
 
         GeoClient _Proxy = null;
         StatefulGeoClient _ProxyStateful = null;
+        SynchronizationContext _SyncContext = null;
+        TaskScheduler _TaskScheduler = null;
 
         private async void btnGetInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -189,31 +194,62 @@ namespace GeoLib.Client
                 new ZipCityData() { ZipCode = "07094", City = "Storybrooke" }
             };
 
-            try
+            lstUpdates.Items.Clear();
+
+            //Task.Run(() =>
+            //{
+            //    try
+            //    {
+            //        GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            //        using (TransactionScope scope = new TransactionScope())
+            //        {
+            //            proxy.UpdateZipCity(cityZipList);
+            //            proxy.Close();
+            //            //throw new ApplicationException("uh oh");
+            //            scope.Complete();
+            //        }
+            //        MessageBox.Show("Updated.");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error: " + ex.Message);
+            //    }
+            //});
+
+            GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            Task<int> task = proxy.UpdateZipCityAsync(cityZipList);
+
+            task.ContinueWith(result =>
             {
-                GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
-                using (TransactionScope scope = new TransactionScope())
+                if (result.Exception == null)
+                    MessageBox.Show($"Updated {result.Result}");
+                else
                 {
-                    proxy.UpdateZipCity(cityZipList);
-                    proxy.Close();
-
-                    //throw new ApplicationException("uh oh");
-
-                    scope.Complete();
+                    //MessageBox.Show("Error: " + result.Exception.Message + "\n\r" + result.Exception.InnerException.Message);
+                    try
+                    {
+                        throw result.Exception.InnerException;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
                 }
-                
-                
-                MessageBox.Show("Updated.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            });
+
+            //MessageBox.Show("Call made");
         }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
         public void ZipUpdated(ZipCityData zipCityData)
         {
-            MessageBox.Show($"Updated zipcode {zipCityData.ZipCode} with city {zipCityData.City}");
+            //MessageBox.Show($"Updated zipcode {zipCityData.ZipCode} with city {zipCityData.City}");
+            Task task = new Task(() =>
+            {
+               lstUpdates.Items.Add(zipCityData);
+            });
+            task.Start(_TaskScheduler);
+
         }
 
         private void btnPutBack_Click(object sender, RoutedEventArgs e)
@@ -222,21 +258,47 @@ namespace GeoLib.Client
             {
                 new ZipCityData() { ZipCode = "07035", City = "Linkoln Park" },
                 new ZipCityData() { ZipCode = "33030", City = "Homestead" },
-                new ZipCityData() { ZipCode = "90210", City = "90210-city" },
-                new ZipCityData() { ZipCode = "07094", City = "07094-city" }
+                new ZipCityData() { ZipCode = "90210", City = "Beverly Hills" },
+                new ZipCityData() { ZipCode = "07094", City = "Secaucus" }
             };
 
-            try
+            lstUpdates.Items.Clear();
+
+            //Task.Run(() =>
+            //{
+            //    try
+            //    {
+            //        GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            //        proxy.UpdateZipCity(cityZipList);
+            //        proxy.Close();
+            //        MessageBox.Show("Updated.");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error: " + ex.Message);
+            //    }
+            //});
+
+            GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            Task<int> task = proxy.UpdateZipCityAsync(cityZipList);
+
+            task.ContinueWith(result =>
             {
-                GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
-                proxy.UpdateZipCity(cityZipList);
-                proxy.Close();
-                MessageBox.Show("Updated.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+                if (result.Exception == null)
+                    MessageBox.Show($"Updated {result.Result}");
+                else
+                {
+                    //MessageBox.Show("Error: " + result.Exception.Message + "\n\r" + result.Exception.InnerException.Message);
+                    try
+                    {
+                        throw result.Exception.InnerException;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            });
         }
 
         private void btnOneWay_Click(object sender, RoutedEventArgs e)

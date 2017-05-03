@@ -13,11 +13,11 @@ using System.Transactions;
 namespace GeoLib.Services
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true
-                     ,InstanceContextMode = InstanceContextMode.PerSession
-                     //,ConcurrencyMode = ConcurrencyMode.Multiple
-                     ,UseSynchronizationContext = false
-                     //,ReleaseServiceInstanceOnTransactionComplete = false
-        )]
+                   , InstanceContextMode = InstanceContextMode.PerSession
+                   , UseSynchronizationContext = false
+                   , ConcurrencyMode = ConcurrencyMode.Reentrant
+                   , ReleaseServiceInstanceOnTransactionComplete = false
+    )]
     public class GeoManager : IGeoService
     {
         public GeoManager()
@@ -162,7 +162,7 @@ namespace GeoLib.Services
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public void UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
+        public int UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
         {
             IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
 
@@ -178,19 +178,23 @@ namespace GeoLib.Services
             foreach (var zipCityItem in zipCityData)
             {
                 counter++;
-                //if (counter == 2)
-                //    throw new FaultException("Sorry, no can do.");
 
                 ZipCode zipCodeEntity = zipCodeRepository.GetByZip(zipCityItem.ZipCode);
                 zipCodeEntity.City = zipCityItem.City;
                 ZipCode updateItem = zipCodeRepository.Update(zipCodeEntity);
 
+                //if (counter == 3)
+                //    throw new FaultException("Manually caused error.");
+
                 IUpdateZipCallback callback = OperationContext.Current.GetCallbackChannel<IUpdateZipCallback>();
                 if (callback != null)
                 {
                     callback.ZipUpdated(zipCityItem);
+                    Thread.Sleep(1000);
                 }
             }
+
+            return counter;
         }
 
         public void OneWayExample()

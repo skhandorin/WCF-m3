@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GeoLib.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeoLib.Contracts
+namespace GeoLib.Proxies
 {
     [ServiceContract(CallbackContract = typeof(IUpdateZipCallback))]
     public interface IGeoService
@@ -32,15 +33,10 @@ namespace GeoLib.Contracts
         [TransactionFlow(TransactionFlowOption.Allowed)]
         int UpdateZipCity(IEnumerable<ZipCityData> zipCityData);
 
+        [OperationContract(Name = "UpdateZipCityBatch")]
+        Task<int> UpdateZipCityAsync(IEnumerable<ZipCityData> zipCityData);
+
         [OperationContract(IsOneWay = true)]
         void OneWayExample();
-    }
-    
-    [ServiceContract]
-    public interface IUpdateZipCallback
-    {
-        [OperationContract(IsOneWay = false)]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void ZipUpdated(ZipCityData zipCityData);
     }
 }
