@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace GeoLib.Proxies
 {
-    public class GeoClient : DuplexClientBase<GeoLib.Contracts.IGeoService>, GeoLib.Contracts.IGeoService
+    public class GeoClient : ClientBase<GeoLib.Contracts.IGeoService>, GeoLib.Contracts.IGeoService
     {
-        public GeoClient(InstanceContext callbackInstance) 
-            : base(callbackInstance)
+        public GeoClient() 
+            : base()
         { }
 
-        public GeoClient(InstanceContext callbackInstance, string endpointName) 
-            : base(callbackInstance, endpointName)
+        public GeoClient(string endpointName) 
+            : base(endpointName)
         { }
 
-        public GeoClient(InstanceContext callbackInstance, Binding binding, EndpointAddress address) 
-            : base(callbackInstance, binding, address)
+        public GeoClient(Binding binding, EndpointAddress address) 
+            : base(binding, address)
         { }
 
         public IEnumerable<string> GetStates(bool primaryOnly)

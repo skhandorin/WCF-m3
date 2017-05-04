@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GeoLib.Contracts
 {
     [ServiceContract(CallbackContract = typeof(IUpdateZipCallback))]
-    public interface IGeoServiceAdmin
+    public interface IGeoAdminService
     {
         [OperationContract(Name = "UpdateZipCity_One")]
         [TransactionFlow(TransactionFlowOption.Allowed)]

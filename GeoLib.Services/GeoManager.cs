@@ -10,6 +10,7 @@ using System.ServiceModel;
 using System.Windows.Forms;
 using System.Transactions;
 using System.Security.Principal;
+using System.Security.Permissions;
 
 namespace GeoLib.Services
 {
@@ -19,7 +20,7 @@ namespace GeoLib.Services
                    , ConcurrencyMode = ConcurrencyMode.Reentrant
                    , ReleaseServiceInstanceOnTransactionComplete = false
     )]
-    public class GeoManager : IGeoService, IGeoServiceAdmin
+    public class GeoManager : IGeoService, IGeoAdminService
     {
         public GeoManager()
         {
@@ -51,9 +52,9 @@ namespace GeoLib.Services
             ZipCodeData zipCodeData = null;
 
             string hostIdentity = WindowsIdentity.GetCurrent().Name;
-            string primaryIdentity = ServiceSecurityContext.Current.PrimaryIdentity.Name;
-            string windowsIdentity = ServiceSecurityContext.Current.WindowsIdentity.Name;
-            string threadIdentity = Thread.CurrentPrincipal.Identity.Name;
+            //string primaryIdentity = ServiceSecurityContext.Current.PrimaryIdentity.Name;
+            //string windowsIdentity = ServiceSecurityContext.Current.WindowsIdentity.Name;
+            //string threadIdentity = Thread.CurrentPrincipal.Identity.Name;
 
             IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
 
@@ -155,6 +156,7 @@ namespace GeoLib.Services
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = "Администраторы")]
         public void UpdateZipCity(string zip, string city)
         {
             IZipCodeRepository zipCodeRepository = _ZipCodeRepository ?? new ZipCodeRepository();
@@ -168,6 +170,7 @@ namespace GeoLib.Services
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        //[PrincipalPermission(SecurityAction.Demand, Role = "Администраторы")]
         public int UpdateZipCity(IEnumerable<ZipCityData> zipCityData)
         {
             string hostIdentity = WindowsIdentity.GetCurrent().Name;

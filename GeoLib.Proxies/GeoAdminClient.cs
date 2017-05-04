@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GeoLib.Proxies
 {
-    public class GeoAdminClient : DuplexClientBase<GeoLib.Contracts.IGeoServiceAdmin>, IGeoServiceAdmin
+    public class GeoAdminClient : DuplexClientBase<GeoLib.Contracts.IGeoAdminService>, IGeoAdminService
     {
         public GeoAdminClient(InstanceContext callbackInstance)
             : base(callbackInstance)

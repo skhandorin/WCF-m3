@@ -33,7 +33,7 @@ namespace GeoLib.Client
         {
             InitializeComponent();
 
-            _Proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            _Proxy = new GeoClient("tcpEP");
             _Proxy.Open();
             _ProxyStateful = new StatefulGeoClient();
 
@@ -201,6 +201,10 @@ namespace GeoLib.Client
                 try
                 {
                     GeoAdminClient proxy = new GeoAdminClient(new InstanceContext(this), "tcpEP");
+
+                    //proxy.ClientCredentials.Windows.ClientCredential.UserName = "wcfuser";
+                    //proxy.ClientCredentials.Windows.ClientCredential.Password = "khachapur4w!";
+
                     int updated = 0;
                     using (TransactionScope scope = new TransactionScope())
                     {
@@ -304,7 +308,7 @@ namespace GeoLib.Client
 
         private void btnOneWay_Click(object sender, RoutedEventArgs e)
         {
-            GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpEP");
+            GeoClient proxy = new GeoClient("tcpEP");
 
             proxy.OneWayExample();
 
